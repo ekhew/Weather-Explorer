@@ -58,7 +58,7 @@ body {
     margin-bottom: 0.05em;
 }
 
-.myIcon {
+#myIcon {
     margin-bottom: 2em;
 }
 
@@ -67,7 +67,7 @@ body {
     margin-bottom: 0.8em;
 }
 
-.temperature-max-min span {
+.temperature-maxmin {
     font-size: 1.5rem;
 }
 
@@ -90,13 +90,16 @@ body {
     border-radius: 1.25em;
 }
 
+.forecast-day, .forecast-maxmin {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 1.8rem;
+}
+
 .forecast-day {
     font-size: 1.2rem;
     font-weight: bold;
-}
-
-.forecast-day, .forecast-maxmin {
-    padding: 2.5rem;
 }
 
 .forecast canvas {
@@ -104,4 +107,8 @@ body {
     padding-bottom: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.forecast-maxmin {
+    font-size: 1.2rem;
 }

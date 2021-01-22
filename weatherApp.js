@@ -5,13 +5,17 @@ window.addEventListener('load', ()=> {
     let locationName = document.querySelector('.location-name');
     let weatherCondition = document.querySelector('.weather-condition');
     let temperatureFeelsLike = document.querySelector('.temperature-feels-like');
-    let temperatureDegreeMax = document.querySelector('.temperature-degree-max');
-    let temperatureDegreeMin = document.querySelector('.temperature-degree-min');
+    let temperatureMaxMin = document.querySelector('.temperature-maxmin');
     let forecastDayOne = document.querySelector('#forecast-day-one');
     let forecastDayTwo = document.querySelector('#forecast-day-two');
     let forecastDayThree = document.querySelector('#forecast-day-three');
     let forecastDayFour = document.querySelector('#forecast-day-four');
     let forecastDayFive = document.querySelector('#forecast-day-five');
+    let forecastMaxMinOne = document.querySelector('#forecast-maxmin-one');
+    let forecastMaxMinTwo = document.querySelector('#forecast-maxmin-two');
+    let forecastMaxMinThree = document.querySelector('#forecast-maxmin-three');
+    let forecastMaxMinFour = document.querySelector('#forecast-maxmin-four');
+    let forecastMaxMinFive = document.querySelector('#forecast-maxmin-five');
 
     let weekday = new Array(7);
         weekday[0] = "Sunday";
@@ -51,8 +55,7 @@ window.addEventListener('load', ()=> {
                     locationName.textContent = data.name + ", " + data.sys.country;
                     weatherCondition.textContent = data.weather[0].description;
                     temperatureFeelsLike.textContent = "Feels like " + Math.round(data.main.feels_like) + "°";
-                    temperatureDegreeMax.textContent = Math.round(data.main.temp_max) + "°";
-                    temperatureDegreeMin.textContent = Math.round(data.main.temp_min) + "°";
+                    temperatureMaxMin.textContent = Math.round(data.main.temp_max) + "° / " + Math.round(data.main.temp_min) + "°";
 
                     //set the icon
                     const myIcon = data.weather[0].icon;
@@ -68,6 +71,14 @@ window.addEventListener('load', ()=> {
                 })
                 .then(data => {
                     console.log(data);
+                    //sets the max and min temperatures for the forecast section
+                    forecastMaxMinOne.textContent = Math.round(data.daily[1].temp.max) + "° / " + Math.round(data.daily[1].temp.min) + "°";
+                    forecastMaxMinTwo.textContent = Math.round(data.daily[2].temp.max) + "° / " + Math.round(data.daily[2].temp.min) + "°";
+                    forecastMaxMinThree.textContent = Math.round(data.daily[3].temp.max) + "° / " + Math.round(data.daily[3].temp.min) + "°";
+                    forecastMaxMinFour.textContent = Math.round(data.daily[4].temp.max) + "° / " + Math.round(data.daily[4].temp.min) + "°";
+                    forecastMaxMinFive.textContent = Math.round(data.daily[5].temp.max) + "° / " + Math.round(data.daily[5].temp.min) + "°";
+                    
+                    //sets icons for the five day weather forecast section
                     const myIconOne = data.daily[1].weather[0].icon;
                     setIcons(myIconOne, document.querySelector('#myIcon-one'));
                     const myIconTwo = data.daily[2].weather[0].icon;
@@ -98,7 +109,6 @@ window.addEventListener('load', ()=> {
             forecastDayThree.textContent = forecastDays[2];
             forecastDayFour.textContent = forecastDays[3];
             forecastDayFive.textContent = forecastDays[4];
-
         });
     } else {
         h1.textContent = "Error: Location not available!";
