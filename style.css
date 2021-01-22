@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-left: 50vh;
+    padding-right: 50vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    height: 100vh;
+    background: linear-gradient(rgb(26,227,255), rgb(17,98,255));
+    font-family: sans-serif;
+    color: black;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-rows: 0.05fr 0.8fr;
+    grid-gap: 2em 2.5em;
+    grid-template-areas:
+        "todays-date todays-date"
+        "temperature forecast";
+}
+
+.todays-date {
+    grid-area: todays-date;
+}
+
+.todays-date h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.temperature {
+    grid-area: temperature;
+    background-color: white;
+    box-shadow: 0.5em 0.5em 1em rgb(50,50,50);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.weather-condition {
+    font-size: 3rem;
+    margin-top: 0.8em;
+    margin-bottom: 0.2em;
+}
+
+.location-name {
+    font-size: 1.2rem;
+    margin-bottom: 1em;
+}
+
+.temperature-current {
+    font-size: 6rem;
+    margin-bottom: 0.1em;
+}
+
+.myIcon {
+    margin-bottom: 1.2em;
+}
+
+.temperature-feels-like {
+    font-size: 2rem;
+    margin-bottom: 0.8em;
+}
+
+.temperature-max-min span {
+    font-size: 1.5rem;
+}
+
+.forecast {
+    grid-area: forecast;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forecast div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0.5em 0.5em 1em rgb(50,50,50);
+    border-radius: 1.5em;
+}
+
+.forecast p {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.forecast-day {
+    padding-left: 4.9rem;
+}
+
+.forecast-icon {
+    padding-left: 4.9rem;
+    padding-right: 4.9rem;
+}
+
+.forecast-maxmin {
+    padding-right: 4.9rem;
+}
