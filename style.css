@@ -55,11 +55,11 @@ body {
 
 .temperature-current {
     font-size: 6rem;
-    margin-bottom: 0.1em;
+    margin-bottom: 0.05em;
 }
 
 .myIcon {
-    margin-bottom: 1.2em;
+    margin-bottom: 2em;
 }
 
 .temperature-feels-like {
@@ -73,7 +73,6 @@ body {
 
 .forecast {
     grid-area: forecast;
-    border-radius: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,28 +80,28 @@ body {
 }
 
 .forecast div {
+    width: 27em;
+    height: 6em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: white;
     box-shadow: 0.5em 0.5em 1em rgb(50,50,50);
-    border-radius: 1.5em;
-}
-
-.forecast p {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    border-radius: 1.25em;
 }
 
 .forecast-day {
-    padding-left: 4.9rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-.forecast-icon {
-    padding-left: 4.9rem;
-    padding-right: 4.9rem;
+.forecast-day, .forecast-maxmin {
+    padding: 2.5rem;
 }
 
-.forecast-maxmin {
-    padding-right: 4.9rem;
+.forecast canvas {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }

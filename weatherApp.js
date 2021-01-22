@@ -7,13 +7,13 @@ window.addEventListener('load', ()=> {
     let temperatureFeelsLike = document.querySelector('.temperature-feels-like');
     let temperatureDegreeMax = document.querySelector('.temperature-degree-max');
     let temperatureDegreeMin = document.querySelector('.temperature-degree-min');
+    let forecastDayOne = document.querySelector('#forecast-day-one');
+    let forecastDayTwo = document.querySelector('#forecast-day-two');
+    let forecastDayThree = document.querySelector('#forecast-day-three');
+    let forecastDayFour = document.querySelector('#forecast-day-four');
+    let forecastDayFive = document.querySelector('#forecast-day-five');
 
-    //this IIFE gets the day of the week and the date
-    (function() {
-        let todaysDate = document.querySelector('.date');
-        let d = new Date();
-
-        let weekday = new Array(7);
+    let weekday = new Array(7);
         weekday[0] = "Sunday";
         weekday[1] = "Monday";
         weekday[2] = "Tuesday";
@@ -21,7 +21,11 @@ window.addEventListener('load', ()=> {
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-      
+
+    //this IIFE gets the day of the week and the date
+    (function() {
+        let todaysDate = document.querySelector('.date');
+        let d = new Date();
         let day = weekday[d.getDay()];
         todaysDate.textContent = "Today is " + day + ", " + (new Date()).toString().split(' ').splice(1,3).join(' ');
     })();
@@ -41,7 +45,7 @@ window.addEventListener('load', ()=> {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
+                    //console.log(data);
                     //set DOM elements from the API
                     temperatureCurrent.textContent = Math.round(data.main.temp) + "°";
                     locationName.textContent = data.name + ", " + data.sys.country;
@@ -52,7 +56,7 @@ window.addEventListener('load', ()=> {
 
                     //set the icon
                     const myIcon = data.weather[0].icon;
-                    setIcons(myIcon, document.querySelector('.myIcon'));
+                    setIcons(myIcon, document.querySelector('#myIcon'));
                 })
 
             //API call for 5-day forecast
@@ -64,7 +68,36 @@ window.addEventListener('load', ()=> {
                 })
                 .then(data => {
                     console.log(data);
+                    const myIconOne = data.daily[1].weather[0].icon;
+                    setIcons(myIconOne, document.querySelector('#myIcon-one'));
+                    const myIconTwo = data.daily[2].weather[0].icon;
+                    setIcons(myIconTwo, document.querySelector('#myIcon-two'));
+                    const myIconThree = data.daily[3].weather[0].icon;
+                    setIcons(myIconThree, document.querySelector('#myIcon-three'));
+                    const myIconFour = data.daily[4].weather[0].icon;
+                    setIcons(myIconFour, document.querySelector('#myIcon-four'));
+                    const myIconFive = data.daily[5].weather[0].icon;
+                    setIcons(myIconFive, document.querySelector('#myIcon-five'));
                 })
+
+            //prints out the next five forecast days
+            let d = new Date();
+            let dayCounter = d.getDay();
+            let forecastDays = new Array(0);
+            for (i = 0; i <= 4; i++) {
+                if (dayCounter >= weekday.length - 1) {
+                    dayCounter = 0
+                } else {
+                    dayCounter += 1
+                }
+                forecastDays.push(weekday[dayCounter]);
+            }
+
+            forecastDayOne.textContent = forecastDays[0];
+            forecastDayTwo.textContent = forecastDays[1];
+            forecastDayThree.textContent = forecastDays[2];
+            forecastDayFour.textContent = forecastDays[3];
+            forecastDayFive.textContent = forecastDays[4];
 
         });
     } else {
