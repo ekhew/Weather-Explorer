@@ -5,21 +5,18 @@
 }
 
 body {
-    padding-left: 50vh;
-    padding-right: 50vh;
-    padding-top: 10vh;
-    padding-bottom: 10vh;
     height: 100vh;
+    padding: 1em;
     background: linear-gradient(rgb(26,227,255), rgb(17,98,255));
     font-family: sans-serif;
     color: black;
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;
-    grid-template-rows: 0.05fr 0.8fr;
-    grid-gap: 2em 2.5em;
+    grid-template-rows: 0.15fr 0.85fr;
+    grid-gap: 1em 2em;
     grid-template-areas:
         "todays-date todays-date"
-        "temperature forecast";
+        "current forecast";
 }
 
 .todays-date {
@@ -29,65 +26,83 @@ body {
 .todays-date h1 {
     font-size: 1.5rem;
     text-align: center;
+    margin-top: 2.5em;
 }
 
-.temperature {
-    grid-area: temperature;
-    background-color: white;
-    box-shadow: 0.5em 0.5em 1em rgb(50,50,50);
+.current {
+    grid-area: current;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.current-section {
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0.5em 0.5em 1em rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
     border-radius: 2em;
+    border-top: 0.1em solid rgba(255,255,255,0.5);
+    border-left: 0.1em solid rgba(255,255,255,0.5);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    width: 27.1em;
+    height: 40em;
 }
 
-.weather-condition {
-    font-size: 3rem;
-    margin-top: 0.8em;
-    margin-bottom: 0.2em;
+.current-weather-condition {
+    font-size: 2.5rem;
+    margin-bottom: 0.4em; 
 }
 
-.location-name {
+.current-location-name {
     font-size: 1.2rem;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
-.temperature-current {
+.current-temperature {
     font-size: 6rem;
     margin-bottom: 0.05em;
 }
 
-#myIcon {
+#current-icon {
     margin-bottom: 2em;
 }
 
-.temperature-feels-like {
+.current-temperature-feels-like {
     font-size: 2rem;
     margin-bottom: 0.8em;
 }
 
-.temperature-maxmin {
-    font-size: 1.5rem;
+.current-temperature-maxmin {
+    font-size: 1.7rem;
 }
 
 .forecast {
     grid-area: forecast;
+}
+
+.forecast-section {
+    width: 27.1em;
+    height: 40em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.forecast div {
-    width: 27em;
+.forecast-section div {
+    width: 27.1em;
     height: 6em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: white;
-    box-shadow: 0.5em 0.5em 1em rgb(50,50,50);
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0.5em 0.5em 1em rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
     border-radius: 1.25em;
+    border-top: 0.1em solid rgba(255,255,255,0.5);
+    border-left: 0.1em solid rgba(255,255,255,0.5);
 }
 
 .forecast-day, .forecast-maxmin {

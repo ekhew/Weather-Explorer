@@ -1,11 +1,12 @@
+//run this function when the window loads
 window.addEventListener('load', ()=> {
     let long;
     let lat;
-    let temperatureCurrent = document.querySelector('.temperature-current');
-    let locationName = document.querySelector('.location-name');
-    let weatherCondition = document.querySelector('.weather-condition');
-    let temperatureFeelsLike = document.querySelector('.temperature-feels-like');
-    let temperatureMaxMin = document.querySelector('.temperature-maxmin');
+    let currentTemperature = document.querySelector('.current-temperature');
+    let currentLocationName = document.querySelector('.current-location-name');
+    let currentWeatherCondition = document.querySelector('.current-weather-condition');
+    let currentTemperatureFeelsLike = document.querySelector('.current-temperature-feels-like');
+    let currentTemperatureMaxMin = document.querySelector('.current-temperature-maxmin');
     let forecastDayOne = document.querySelector('#forecast-day-one');
     let forecastDayTwo = document.querySelector('#forecast-day-two');
     let forecastDayThree = document.querySelector('#forecast-day-three');
@@ -16,7 +17,6 @@ window.addEventListener('load', ()=> {
     let forecastMaxMinThree = document.querySelector('#forecast-maxmin-three');
     let forecastMaxMinFour = document.querySelector('#forecast-maxmin-four');
     let forecastMaxMinFive = document.querySelector('#forecast-maxmin-five');
-
     let weekday = new Array(7);
         weekday[0] = "Sunday";
         weekday[1] = "Monday";
@@ -40,7 +40,7 @@ window.addEventListener('load', ()=> {
             long = position.coords.longitude;
             lat = position.coords.latitude;
 
-            //API call for current weather
+            //API call for current weather section
             const proxy = "https://cors-anywhere.herokuapp.com/";
             const api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
             
@@ -50,16 +50,17 @@ window.addEventListener('load', ()=> {
                 })
                 .then(data => {
                     //console.log(data);
-                    //set DOM elements from the API
-                    temperatureCurrent.textContent = Math.round(data.main.temp) + "°";
-                    locationName.textContent = data.name + ", " + data.sys.country;
-                    weatherCondition.textContent = data.weather[0].description;
-                    temperatureFeelsLike.textContent = "Feels like " + Math.round(data.main.feels_like) + "°";
-                    temperatureMaxMin.textContent = Math.round(data.main.temp_max) + "° / " + Math.round(data.main.temp_min) + "°";
 
-                    //set the icon
+                    //sets DOM elements from the API for the current day section
+                    currentTemperature.textContent = Math.round(data.main.temp) + "°";
+                    currentLocationName.textContent = data.name + ", " + data.sys.country;
+                    currentWeatherCondition.textContent = data.weather[0].description;
+                    currentTemperatureFeelsLike.textContent = "Feels like " + Math.round(data.main.feels_like) + "°";
+                    currentTemperatureMaxMin.textContent = Math.round(data.main.temp_max) + "° / " + Math.round(data.main.temp_min) + "°";
+
+                    //set the icon for the current weather
                     const myIcon = data.weather[0].icon;
-                    setIcons(myIcon, document.querySelector('#myIcon'));
+                    setIcons(myIcon, document.querySelector('#current-icon'));
                 })
 
             //API call for 5-day forecast
@@ -70,7 +71,8 @@ window.addEventListener('load', ()=> {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
+                    //console.log(data);
+
                     //sets the max and min temperatures for the forecast section
                     forecastMaxMinOne.textContent = Math.round(data.daily[1].temp.max) + "° / " + Math.round(data.daily[1].temp.min) + "°";
                     forecastMaxMinTwo.textContent = Math.round(data.daily[2].temp.max) + "° / " + Math.round(data.daily[2].temp.min) + "°";
@@ -79,19 +81,19 @@ window.addEventListener('load', ()=> {
                     forecastMaxMinFive.textContent = Math.round(data.daily[5].temp.max) + "° / " + Math.round(data.daily[5].temp.min) + "°";
                     
                     //sets icons for the five day weather forecast section
-                    const myIconOne = data.daily[1].weather[0].icon;
-                    setIcons(myIconOne, document.querySelector('#myIcon-one'));
-                    const myIconTwo = data.daily[2].weather[0].icon;
-                    setIcons(myIconTwo, document.querySelector('#myIcon-two'));
-                    const myIconThree = data.daily[3].weather[0].icon;
-                    setIcons(myIconThree, document.querySelector('#myIcon-three'));
-                    const myIconFour = data.daily[4].weather[0].icon;
-                    setIcons(myIconFour, document.querySelector('#myIcon-four'));
-                    const myIconFive = data.daily[5].weather[0].icon;
-                    setIcons(myIconFive, document.querySelector('#myIcon-five'));
+                    const forecastIconOne = data.daily[1].weather[0].icon;
+                    setIcons(forecastIconOne, document.querySelector('#forecast-icon-one'));
+                    const forecastIconTwo = data.daily[2].weather[0].icon;
+                    setIcons(forecastIconTwo, document.querySelector('#forecast-icon-two'));
+                    const forecastIconThree = data.daily[3].weather[0].icon;
+                    setIcons(forecastIconThree, document.querySelector('#forecast-icon-three'));
+                    const forecastIconFour = data.daily[4].weather[0].icon;
+                    setIcons(forecastIconFour, document.querySelector('#forecast-icon-four'));
+                    const forecastIconFive = data.daily[5].weather[0].icon;
+                    setIcons(forecastIconFive, document.querySelector('#forecast-icon-five'));
                 })
 
-            //prints out the next five forecast days
+            //prints out the next five forecast day names using the 'weekday' array
             let d = new Date();
             let dayCounter = d.getDay();
             let forecastDays = new Array(0);
@@ -111,7 +113,7 @@ window.addEventListener('load', ()=> {
             forecastDayFive.textContent = forecastDays[4];
         });
     } else {
-        h1.textContent = "Error: Location not available!";
+        alert("Error: Location not found!"); //print an error message if location is not found, or if user's location is not turned on
     }
 
     //this function takes the original icon from the API and converts it to its corresponding Skycon, then sets the new icon

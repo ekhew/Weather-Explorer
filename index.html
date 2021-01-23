@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="description" content="This is my weather app.">
         <meta name="author" content="Edwin K.">
-        <meta name="keywords" content="weather, app, sunny, rain, snow, cloudy">
+        <meta name="keywords" content="weather, app, sunny, rain, snow, cloudy, windy, clear, sky">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Weather App</title>
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -13,42 +13,45 @@
         <div class="todays-date">
             <h1 class="date">-</h1>
         </div>
-        <div class="temperature">
-            <h2 class="weather-condition">-</h2>
-            <p class="location-name">-</p>
-            <h2 class="temperature-current">-</h2>
-            <canvas id="myIcon" width="200" height="200"></canvas>
-            <p class="temperature-feels-like">-</p>
-            <p class="temperature-maxmin">max / min</p>
+        <div class="current">
+            <div class="current-section">
+                <h2 class="current-weather-condition">current weather</h2>
+                <p class="current-location-name">Location</p>
+                <h2 class="current-temperature">-°</h2>
+                <canvas id="current-icon" width="200" height="200"></canvas>
+                <p class="current-temperature-feels-like">Feels like -°</p>
+                <p class="current-temperature-maxmin">max° / min°</p>
+            </div>
         </div>
         <div class="forecast">
-            <div class="day-one">
-                <p class="forecast-day" id="forecast-day-one">-</p>
-                <canvas id="myIcon-one" width="60" height="60"></canvas>
-                <p class="forecast-maxmin" id="forecast-maxmin-one">max / min</p>
+            <div class="forecast-section">
+                <div class="forecast-one">
+                    <p class="forecast-day" id="forecast-day-one">Day 1</p>
+                    <canvas id="forecast-icon-one" width="60" height="60"></canvas>
+                    <p class="forecast-maxmin" id="forecast-maxmin-one">max° / min°</p>
+                </div>
+                <div class="forecast-two">
+                    <p class="forecast-day" id="forecast-day-two">Day 2</p>
+                    <canvas id="forecast-icon-two" width="60" height="60"></canvas>
+                    <p class="forecast-maxmin" id="forecast-maxmin-two">max° / min°</p>
+                </div>
+                <div class="forecast-three">
+                    <p class="forecast-day" id="forecast-day-three">Day 3</p>
+                    <canvas id="forecast-icon-three" width="60" height="60"></canvas>
+                    <p class="forecast-maxmin" id="forecast-maxmin-three">max° / min°</p>
+                </div>
+                <div class="forecast-four">
+                    <p class="forecast-day" id="forecast-day-four">Day 4</p>
+                    <canvas id="forecast-icon-four" width="60" height="60"></canvas>
+                    <p class="forecast-maxmin" id="forecast-maxmin-four">max° / min°</p>
+                </div>
+                <div class="forecast-five">
+                    <p class="forecast-day" id="forecast-day-five">Day 5</p>
+                    <canvas id="forecast-icon-five" width="60" height="60"></canvas>
+                    <p class="forecast-maxmin" id="forecast-maxmin-five">max° / min°</p>
+                </div>
             </div>
-            <div class="day-two">
-                <p class="forecast-day" id="forecast-day-two">-</p>
-                <canvas id="myIcon-two" width="60" height="60"></canvas>
-                <p class="forecast-maxmin" id="forecast-maxmin-two">max / min</p>
-            </div>
-            <div class="day-three">
-                <p class="forecast-day" id="forecast-day-three">-</p>
-                <canvas id="myIcon-three" width="60" height="60"></canvas>
-                <p class="forecast-maxmin" id="forecast-maxmin-three">max / min</p>
-            </div>
-            <div class="day-four">
-                <p class="forecast-day" id="forecast-day-four">-</p>
-                <canvas id="myIcon-four" width="60" height="60"></canvas>
-                <p class="forecast-maxmin" id="forecast-maxmin-four">max / min</p>
-            </div>
-            <div class="day-five">
-                <p class="forecast-day" id="forecast-day-five">-</p>
-                <canvas id="myIcon-five" width="60" height="60"></canvas>
-                <p class="forecast-maxmin" id="forecast-maxmin-five">max / min</p>
-            </div>
-        </div>
-                      
+        </div>            
         <script src="skycons.js"></script>
         <script src="weatherApp.js"></script>
     </body>
