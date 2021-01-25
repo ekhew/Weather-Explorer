@@ -31,6 +31,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2em;
 }
 
 .current {
@@ -140,6 +141,7 @@ body {
 
 @media screen and (max-width: 950px) {
     body {
+        position: relative;
         height: auto;
         background: linear-gradient(rgb(26,227,255), rgb(17,98,255));
         display: grid;
@@ -147,16 +149,14 @@ body {
         grid-template-rows: 0.1fr 0.4fr 0.4fr;
         grid-gap: 1.5em 1em;
         grid-template-areas:
-            "todays-date"
+            "search-box"
             "current"
             "forecast";
     }
 
-    .todays-date h1 {
-        font-size: 1.5rem;
-        text-align: center;
-        margin-top: 1.3em;
-        margin-bottom: 0em;
+    #map {
+        height: 100%;
+        width: 100%;
     }
 
     .current {
@@ -180,10 +180,6 @@ body {
 }
 
 @media screen and (max-width: 420px) {
-    .todays-date h1 {
-        font-size: 1.2rem;
-    }
-
     .current-section {
         width: 20em;
         height: 40em;
