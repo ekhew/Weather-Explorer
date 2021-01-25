@@ -10,6 +10,6 @@ This project was created as a way for me to practice working with HTML, CSS, and
 - Responsive to screen size
 - Cool background map 
 ## Credits
-https://openweathermap.org/
-https://www.mapbox.com/ 
-https://darkskyapp.github.io/skycons/
+- [OpenWeatherMap] (https://openweathermap.org/)
+- [Mapbox] (https://www.mapbox.com/) 
+- [Skycons] (https://darkskyapp.github.io/skycons/)
