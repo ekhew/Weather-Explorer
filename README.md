@@ -9,3 +9,7 @@ This project was created as a way for me to practice working with HTML, CSS, and
 - Five day weather forecast
 - Responsive to screen size
 - Cool background map 
+## Credits
+https://openweathermap.org/
+https://www.mapbox.com/ 
+https://darkskyapp.github.io/skycons/
