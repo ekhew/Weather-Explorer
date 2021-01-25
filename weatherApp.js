@@ -31,90 +31,106 @@ window.addEventListener('load', ()=> {
         let todaysDate = document.querySelector('.date');
         let d = new Date();
         let day = weekday[d.getDay()];
-        todaysDate.textContent = "Today is " + day + ", " + (new Date()).toString().split(' ').splice(1,3).join(' ');
+        todaysDate.textContent = day + ", " + (new Date()).toString().split(' ').splice(1,3).join(' ');
     })();
 
-    //get user's location (latitude and longitude) and uses it to get the correct data from the API
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            long = position.coords.longitude;
-            lat = position.coords.latitude;
+    //map from Mapbox API
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZWR3aW5rIiwiYSI6ImNra2JuM25ybzBhYjEycWt4eXlxZWNkbngifQ.-xT7LoGTSPbbtSf_m-apOQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+    });
 
-            //API call for current weather section
-            const proxy = "https://cors-anywhere.herokuapp.com/";
-            const api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
-            
-            fetch(api)
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    //console.log(data);
+    //search box from Mapbox API
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    });
 
-                    //sets DOM elements from the API for the current day section
-                    currentTemperature.textContent = Math.round(data.main.temp) + "°";
-                    currentLocationName.textContent = data.name + ", " + data.sys.country;
-                    currentWeatherCondition.textContent = data.weather[0].description;
-                    currentTemperatureFeelsLike.textContent = "Feels like " + Math.round(data.main.feels_like) + "°";
-                    currentTemperatureMaxMin.textContent = Math.round(data.main.temp_max) + "° / " + Math.round(data.main.temp_min) + "°";
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-                    //set the icon for the current weather
-                    const myIcon = data.weather[0].icon;
-                    setIcons(myIcon, document.querySelector('#current-icon'));
-                })
-
-            //API call for 5-day forecast
-            const apiForecast = `${proxy}https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
+    //run after getting a result from the search box
+    geocoder.on('result', function(e) {
+        console.log(e.result);
+    
+        //set the latitude and longitude coordinates based on the result of the search
+        let long = e.result.center[0];
+        let lat = e.result.center[1];
         
-            fetch(apiForecast)
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    //console.log(data);
+        //OpenWeatherMap API call for current weather section
+        const proxy = "https://cors-anywhere.herokuapp.com/";
+        let api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
+        
+        fetch(api)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                //console.log(data);
 
-                    //sets the max and min temperatures for the forecast section
-                    forecastMaxMinOne.textContent = Math.round(data.daily[1].temp.max) + "° / " + Math.round(data.daily[1].temp.min) + "°";
-                    forecastMaxMinTwo.textContent = Math.round(data.daily[2].temp.max) + "° / " + Math.round(data.daily[2].temp.min) + "°";
-                    forecastMaxMinThree.textContent = Math.round(data.daily[3].temp.max) + "° / " + Math.round(data.daily[3].temp.min) + "°";
-                    forecastMaxMinFour.textContent = Math.round(data.daily[4].temp.max) + "° / " + Math.round(data.daily[4].temp.min) + "°";
-                    forecastMaxMinFive.textContent = Math.round(data.daily[5].temp.max) + "° / " + Math.round(data.daily[5].temp.min) + "°";
-                    
-                    //sets icons for the five day weather forecast section
-                    const forecastIconOne = data.daily[1].weather[0].icon;
-                    setIcons(forecastIconOne, document.querySelector('#forecast-icon-one'));
-                    const forecastIconTwo = data.daily[2].weather[0].icon;
-                    setIcons(forecastIconTwo, document.querySelector('#forecast-icon-two'));
-                    const forecastIconThree = data.daily[3].weather[0].icon;
-                    setIcons(forecastIconThree, document.querySelector('#forecast-icon-three'));
-                    const forecastIconFour = data.daily[4].weather[0].icon;
-                    setIcons(forecastIconFour, document.querySelector('#forecast-icon-four'));
-                    const forecastIconFive = data.daily[5].weather[0].icon;
-                    setIcons(forecastIconFive, document.querySelector('#forecast-icon-five'));
-                })
+                //sets DOM elements from the API for the current day section
+                currentTemperature.textContent = Math.round(data.main.temp) + "°";
+                currentLocationName.textContent = data.name + ", " + data.sys.country;
+                currentWeatherCondition.textContent = data.weather[0].description;
+                currentTemperatureFeelsLike.textContent = "Feels like " + Math.round(data.main.feels_like) + "°";
+                currentTemperatureMaxMin.textContent = Math.round(data.main.temp_max) + "° / " + Math.round(data.main.temp_min) + "°";
 
-            //prints out the next five forecast day names using the 'weekday' array
-            let d = new Date();
-            let dayCounter = d.getDay();
-            let forecastDays = new Array(0);
-            for (i = 0; i <= 4; i++) {
-                if (dayCounter >= weekday.length - 1) {
-                    dayCounter = 0
-                } else {
-                    dayCounter += 1
-                }
-                forecastDays.push(weekday[dayCounter]);
+                //set the icon for the current weather
+                const myIcon = data.weather[0].icon;
+                setIcons(myIcon, document.querySelector('#current-icon'));
+            })
+
+        //OpenWeatherMap API call for 5-day forecast
+        let apiForecast = `${proxy}https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
+    
+        fetch(apiForecast)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                //console.log(data);
+
+                //sets the max and min temperatures for the forecast section
+                forecastMaxMinOne.textContent = Math.round(data.daily[1].temp.max) + "° / " + Math.round(data.daily[1].temp.min) + "°";
+                forecastMaxMinTwo.textContent = Math.round(data.daily[2].temp.max) + "° / " + Math.round(data.daily[2].temp.min) + "°";
+                forecastMaxMinThree.textContent = Math.round(data.daily[3].temp.max) + "° / " + Math.round(data.daily[3].temp.min) + "°";
+                forecastMaxMinFour.textContent = Math.round(data.daily[4].temp.max) + "° / " + Math.round(data.daily[4].temp.min) + "°";
+                forecastMaxMinFive.textContent = Math.round(data.daily[5].temp.max) + "° / " + Math.round(data.daily[5].temp.min) + "°";
+                
+                //sets icons for the five day weather forecast section
+                const forecastIconOne = data.daily[1].weather[0].icon;
+                setIcons(forecastIconOne, document.querySelector('#forecast-icon-one'));
+                const forecastIconTwo = data.daily[2].weather[0].icon;
+                setIcons(forecastIconTwo, document.querySelector('#forecast-icon-two'));
+                const forecastIconThree = data.daily[3].weather[0].icon;
+                setIcons(forecastIconThree, document.querySelector('#forecast-icon-three'));
+                const forecastIconFour = data.daily[4].weather[0].icon;
+                setIcons(forecastIconFour, document.querySelector('#forecast-icon-four'));
+                const forecastIconFive = data.daily[5].weather[0].icon;
+                setIcons(forecastIconFive, document.querySelector('#forecast-icon-five'));
+            })
+
+        //prints out the next five forecast day names using the 'weekday' array
+        let d = new Date();
+        let dayCounter = d.getDay();
+        let forecastDays = new Array(0);
+        for (i = 0; i <= 4; i++) {
+            if (dayCounter >= weekday.length - 1) {
+                dayCounter = 0
+            } else {
+                dayCounter += 1
             }
+            forecastDays.push(weekday[dayCounter]);
+        }
 
-            forecastDayOne.textContent = forecastDays[0];
-            forecastDayTwo.textContent = forecastDays[1];
-            forecastDayThree.textContent = forecastDays[2];
-            forecastDayFour.textContent = forecastDays[3];
-            forecastDayFive.textContent = forecastDays[4];
-        });
-    } else {
-        alert("Error: Location not found!"); //print an error message if location is not found, or if user's location is not turned on
-    }
+        forecastDayOne.textContent = forecastDays[0];
+        forecastDayTwo.textContent = forecastDays[1];
+        forecastDayThree.textContent = forecastDays[2];
+        forecastDayFour.textContent = forecastDays[3];
+        forecastDayFive.textContent = forecastDays[4];
+    });
 
     //this function takes the original icon from the API and converts it to its corresponding Skycon, then sets the new icon
     function setIcons(icon, iconID) {

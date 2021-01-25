@@ -8,13 +8,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Weather App</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script defer src="skycons.js"></script>
+        <script defer src="weatherApp.js"></script>
+        <script defer src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+        <script defer src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+        <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css"/>
     </head>
     <body>
-        <div class="todays-date">
-            <h1 class="date">-</h1>
+        <div id="map"></div>
+        <div class="search-box">
+            <div id="geocoder" class="geocoder"></div>
+        </div>
         </div>
         <div class="current">
             <div class="current-section">
+                <p class="date">-</p>
                 <h2 class="current-weather-condition">current weather</h2>
                 <p class="current-location-name">Location</p>
                 <h2 class="current-temperature">-°</h2>
@@ -51,8 +60,6 @@
                     <p class="forecast-maxmin" id="forecast-maxmin-five">max° / min°</p>
                 </div>
             </div>
-        </div>           
-        <script src="skycons.js"></script>
-        <script src="weatherApp.js"></script>
+        </div>
     </body>
 </html>
