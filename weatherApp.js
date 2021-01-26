@@ -1,3 +1,4 @@
+//test comment
 //run this function when the window loads
 window.addEventListener('load', ()=> {
     let weekday = new Array(7);
