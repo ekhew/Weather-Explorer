@@ -117,10 +117,7 @@ body {
 }
 
 .forecast-day, .forecast-maxmin {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    padding-left: 2rem;
-    padding-right: 1.8rem;
+    padding: 2.5rem 1.8rem 2.5rem 2rem;
 }
 
 .forecast-day {
@@ -129,10 +126,7 @@ body {
 }
 
 .forecast canvas {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 1rem 2rem 1rem 2rem;
 }
 
 .forecast-maxmin {
@@ -198,14 +192,11 @@ body {
     }
 
     .forecast-day, .forecast-maxmin {
-        padding-top: 2.5rem;
-        padding-bottom: 2.5rem;
-        padding-left: 0.8rem;
-        padding-right: 0.8rem;
+        padding-top: 2.5rem 0.8rem 2.5rem 0.8rem;
     }
 
     .forecast canvas {
-        padding-left: 0.5rem;
         padding-right: 0.5rem;
+        padding-left: 0.5rem;
     }
 }

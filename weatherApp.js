@@ -1,22 +1,5 @@
 //run this function when the window loads
 window.addEventListener('load', ()=> {
-    let long;
-    let lat;
-    let currentTemperature = document.querySelector('.current-temperature');
-    let currentLocationName = document.querySelector('.current-location-name');
-    let currentWeatherCondition = document.querySelector('.current-weather-condition');
-    let currentTemperatureFeelsLike = document.querySelector('.current-temperature-feels-like');
-    let currentTemperatureMaxMin = document.querySelector('.current-temperature-maxmin');
-    let forecastDayOne = document.querySelector('#forecast-day-one');
-    let forecastDayTwo = document.querySelector('#forecast-day-two');
-    let forecastDayThree = document.querySelector('#forecast-day-three');
-    let forecastDayFour = document.querySelector('#forecast-day-four');
-    let forecastDayFive = document.querySelector('#forecast-day-five');
-    let forecastMaxMinOne = document.querySelector('#forecast-maxmin-one');
-    let forecastMaxMinTwo = document.querySelector('#forecast-maxmin-two');
-    let forecastMaxMinThree = document.querySelector('#forecast-maxmin-three');
-    let forecastMaxMinFour = document.querySelector('#forecast-maxmin-four');
-    let forecastMaxMinFive = document.querySelector('#forecast-maxmin-five');
     let weekday = new Array(7);
         weekday[0] = "Sunday";
         weekday[1] = "Monday";
@@ -26,7 +9,7 @@ window.addEventListener('load', ()=> {
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
 
-    //this IIFE gets the day of the week and the date
+    //this IIFE gets the day of the week and the date, and then sets the date
     (function() {
         let todaysDate = document.querySelector('.date');
         let d = new Date();
@@ -53,13 +36,19 @@ window.addEventListener('load', ()=> {
 
     //run after getting a result from the search box
     geocoder.on('result', function(e) {
-        console.log(e.result);
+        //console.log(e.result);
     
         //set the latitude and longitude coordinates based on the result of the search
         let long = e.result.center[0];
         let lat = e.result.center[1];
+
+        let currentTemperature = document.querySelector('.current-temperature');
+        let currentLocationName = document.querySelector('.current-location-name');
+        let currentWeatherCondition = document.querySelector('.current-weather-condition');
+        let currentTemperatureFeelsLike = document.querySelector('.current-temperature-feels-like');
+        let currentTemperatureMaxMin = document.querySelector('.current-temperature-maxmin');
         
-        //OpenWeatherMap API call for current weather section
+        //OpenWeatherMap API call for the current weather section
         const proxy = "https://cors-anywhere.herokuapp.com/";
         let api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
         
@@ -82,6 +71,12 @@ window.addEventListener('load', ()=> {
                 setIcons(myIcon, document.querySelector('#current-icon'));
             })
 
+        let forecastMaxMinOne = document.querySelector('#forecast-maxmin-one');
+        let forecastMaxMinTwo = document.querySelector('#forecast-maxmin-two');
+        let forecastMaxMinThree = document.querySelector('#forecast-maxmin-three');
+        let forecastMaxMinFour = document.querySelector('#forecast-maxmin-four');
+        let forecastMaxMinFive = document.querySelector('#forecast-maxmin-five');
+
         //OpenWeatherMap API call for 5-day forecast
         let apiForecast = `${proxy}https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
     
@@ -92,14 +87,14 @@ window.addEventListener('load', ()=> {
             .then(data => {
                 //console.log(data);
 
-                //sets the max and min temperatures for the forecast section
+                //sets the max and min temperatures for the 5-day forecast section
                 forecastMaxMinOne.textContent = Math.round(data.daily[1].temp.max) + "° / " + Math.round(data.daily[1].temp.min) + "°";
                 forecastMaxMinTwo.textContent = Math.round(data.daily[2].temp.max) + "° / " + Math.round(data.daily[2].temp.min) + "°";
                 forecastMaxMinThree.textContent = Math.round(data.daily[3].temp.max) + "° / " + Math.round(data.daily[3].temp.min) + "°";
                 forecastMaxMinFour.textContent = Math.round(data.daily[4].temp.max) + "° / " + Math.round(data.daily[4].temp.min) + "°";
                 forecastMaxMinFive.textContent = Math.round(data.daily[5].temp.max) + "° / " + Math.round(data.daily[5].temp.min) + "°";
                 
-                //sets icons for the five day weather forecast section
+                //sets icons for the 5-day forecast section
                 const forecastIconOne = data.daily[1].weather[0].icon;
                 setIcons(forecastIconOne, document.querySelector('#forecast-icon-one'));
                 const forecastIconTwo = data.daily[2].weather[0].icon;
@@ -112,9 +107,16 @@ window.addEventListener('load', ()=> {
                 setIcons(forecastIconFive, document.querySelector('#forecast-icon-five'));
             })
 
-        //prints out the next five forecast day names using the 'weekday' array
+        let forecastDayOne = document.querySelector('#forecast-day-one');
+        let forecastDayTwo = document.querySelector('#forecast-day-two');
+        let forecastDayThree = document.querySelector('#forecast-day-three');
+        let forecastDayFour = document.querySelector('#forecast-day-four');
+        let forecastDayFive = document.querySelector('#forecast-day-five');
+
+        //sets the day names for the 5-day forecast section using the 'weekday' array
         let d = new Date();
         let dayCounter = d.getDay();
+        //the 'forecastDays' array will store the names of the next five days from the current day
         let forecastDays = new Array(0);
         for (i = 0; i <= 4; i++) {
             if (dayCounter >= weekday.length - 1) {
@@ -132,7 +134,7 @@ window.addEventListener('load', ()=> {
         forecastDayFive.textContent = forecastDays[4];
     });
 
-    //this function takes the original icon from the API and converts it to its corresponding Skycon, then sets the new icon
+    //this function takes the original icon from the OpenWeatherMap API and converts it to its corresponding Skycon using the 'Skycon' function, then sets the new icon
     function setIcons(icon, iconID) {
         const skycons = new Skycons({color: "black"});
         let currentIcon;
