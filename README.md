@@ -10,9 +10,9 @@ This project was created as a way for me to practice working with HTML, CSS, and
 - Responsive to screen size
 - Cool background map 
 
-![Screenshot (770)](https://user-images.githubusercontent.com/56172352/109103742-65b18880-76f9-11eb-87cf-c081eb2ff846.png)
+![Screenshot](https://user-images.githubusercontent.com/56172352/109103742-65b18880-76f9-11eb-87cf-c081eb2ff846.png)
 
-![Screenshot (771)](https://user-images.githubusercontent.com/56172352/109104214-972a5400-76f9-11eb-889f-8f2653e9e6a1.png)
+![Screenshot](https://user-images.githubusercontent.com/56172352/109104214-972a5400-76f9-11eb-889f-8f2653e9e6a1.png)
 
 <img src="https://user-images.githubusercontent.com/56172352/109104294-b9bc6d00-76f9-11eb-870f-96a6bf723f87.png" width="300">
 
