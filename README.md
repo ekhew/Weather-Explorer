@@ -12,6 +12,8 @@ This project was created as a way for me to practice working with HTML, CSS, and
 
 ![Screenshot (770)](https://user-images.githubusercontent.com/56172352/109103742-65b18880-76f9-11eb-87cf-c081eb2ff846.png)
 
+![Screenshot (771)](https://user-images.githubusercontent.com/56172352/109104214-972a5400-76f9-11eb-889f-8f2653e9e6a1.png)
+
 ## Credits
 - [OpenWeatherMap] (https://openweathermap.org/)
 - [Mapbox] (https://www.mapbox.com/) 
