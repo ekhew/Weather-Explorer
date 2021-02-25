@@ -7,8 +7,8 @@ This project was created as a way for me to practice working with HTML, CSS, and
 - View current weather condition
 - View current, feels-like, maximum, and minimum temperatures
 - Five day weather forecast
+- Background map that is responsive to searched location
 - Responsive to screen size
-- Cool background map 
 
 ![Screenshot](https://user-images.githubusercontent.com/56172352/109103742-65b18880-76f9-11eb-87cf-c081eb2ff846.png)
 
