@@ -5,7 +5,7 @@ This project was created as a way for me to practice working with HTML, CSS, and
 ## Features
 - Search for locations
 - View current weather condition
-- View current, feels-like, max, and min temperatures
+- View current, feels-like, maximum, and minimum temperatures
 - Five day weather forecast
 - Responsive to screen size
 - Cool background map 
