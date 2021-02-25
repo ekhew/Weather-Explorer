@@ -9,6 +9,9 @@ This project was created as a way for me to practice working with HTML, CSS, and
 - Five day weather forecast
 - Responsive to screen size
 - Cool background map 
+
+![Screenshot (770)](https://user-images.githubusercontent.com/56172352/109103742-65b18880-76f9-11eb-87cf-c081eb2ff846.png)
+
 ## Credits
 - [OpenWeatherMap] (https://openweathermap.org/)
 - [Mapbox] (https://www.mapbox.com/) 
