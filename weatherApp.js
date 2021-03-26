@@ -49,8 +49,8 @@ window.addEventListener('load', ()=> {
         let currentTemperatureMaxMin = document.querySelector('.current-temperature-maxmin');
         
         //OpenWeatherMap API call for the current weather section
-        const proxy = "https://cors-anywhere.herokuapp.com/";
-        let api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
+        //const proxy = "https://cors-anywhere.herokuapp.com/";
+        let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
         
         fetch(api)
             .then(response => {
@@ -78,7 +78,7 @@ window.addEventListener('load', ()=> {
         let forecastMaxMinFive = document.querySelector('#forecast-maxmin-five');
 
         //OpenWeatherMap API call for 5-day forecast
-        let apiForecast = `${proxy}https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
+        let apiForecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=13a45786ef3705aaebce872627c0573b&units=imperial`;
     
         fetch(apiForecast)
             .then(response => {
